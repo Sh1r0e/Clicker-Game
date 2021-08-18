@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker.WPF\\Clicker.WPF.csproj",
+      "projectUniqueName": "C:\\Users\\Buste\\Clicker-Game\\Clicker.WPF\\Clicker.WPF.csproj",
       "projectName": "Clicker.WPF",
-      "projectPath": "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker.WPF\\Clicker.WPF.csproj",
+      "projectPath": "C:\\Users\\Buste\\Clicker-Game\\Clicker.WPF\\Clicker.WPF.csproj",
       "packagesPath": "C:\\Users\\Buste\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker.WPF\\obj\\",
+      "outputPath": "C:\\Users\\Buste\\Clicker-Game\\Clicker.WPF\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Buste\\AppData\\Roaming\\NuGet\\NuGet.Config",

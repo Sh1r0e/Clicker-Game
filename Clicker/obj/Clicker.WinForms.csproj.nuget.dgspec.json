@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker\\Clicker.WinForms.csproj": {}
+    "C:\\Users\\Buste\\Clicker-Game\\Clicker\\Clicker.WinForms.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker.game\\Clicker.game.csproj": {
+    "C:\\Users\\Buste\\Clicker-Game\\Clicker.game\\Clicker.game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker.game\\Clicker.game.csproj",
+        "projectUniqueName": "C:\\Users\\Buste\\Clicker-Game\\Clicker.game\\Clicker.game.csproj",
         "projectName": "Clicker.game",
-        "projectPath": "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker.game\\Clicker.game.csproj",
+        "projectPath": "C:\\Users\\Buste\\Clicker-Game\\Clicker.game\\Clicker.game.csproj",
         "packagesPath": "C:\\Users\\Buste\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker.game\\obj\\",
+        "outputPath": "C:\\Users\\Buste\\Clicker-Game\\Clicker.game\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Buste\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -58,14 +58,14 @@
         }
       }
     },
-    "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker\\Clicker.WinForms.csproj": {
+    "C:\\Users\\Buste\\Clicker-Game\\Clicker\\Clicker.WinForms.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker\\Clicker.WinForms.csproj",
+        "projectUniqueName": "C:\\Users\\Buste\\Clicker-Game\\Clicker\\Clicker.WinForms.csproj",
         "projectName": "Clicker.WinForms",
-        "projectPath": "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker\\Clicker.WinForms.csproj",
+        "projectPath": "C:\\Users\\Buste\\Clicker-Game\\Clicker\\Clicker.WinForms.csproj",
         "packagesPath": "C:\\Users\\Buste\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker\\obj\\",
+        "outputPath": "C:\\Users\\Buste\\Clicker-Game\\Clicker\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Buste\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,8 +82,8 @@
           "net5.0-windows7.0": {
             "targetAlias": "net5.0-windows",
             "projectReferences": {
-              "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker.game\\Clicker.game.csproj": {
-                "projectPath": "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker.game\\Clicker.game.csproj"
+              "C:\\Users\\Buste\\Clicker-Game\\Clicker.game\\Clicker.game.csproj": {
+                "projectPath": "C:\\Users\\Buste\\Clicker-Game\\Clicker.game\\Clicker.game.csproj"
               }
             }
           }

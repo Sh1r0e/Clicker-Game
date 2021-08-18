@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/Xd5wqOK0gqiTrXoqIIXj4krZZ4WH80MtqL+4HEGOYwWkhR6UcRIhFmz2LWCJPTyQ0iVtlisF7DQOBnqF0w1ug==",
+  "dgSpecHash": "ORnaCpj7+fIvuiElkyhZLi0q6P7l2susW/k38y+er82Z5I+OeExX0j9nDoYZuvhZZjEba0xytQ79G9lR9JqJOQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Buste\\source\\repos\\Clicker\\Clicker\\Clicker.WinForms.csproj",
+  "projectFilePath": "C:\\Users\\Buste\\Clicker-Game\\Clicker\\Clicker.WinForms.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

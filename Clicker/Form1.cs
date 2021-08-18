@@ -1,4 +1,4 @@
-﻿using Clicker.game;
+﻿using Clicker.Game;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,7 +47,7 @@ namespace Clicker
 
         int timerCount = 0;
 
-        private Game game = new Game();
+        private Game.Game game = new Game.Game();
 
         public Clicker()
         {

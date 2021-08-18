@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Clicker.game
+namespace Clicker.Game
 {
     class Building
     {

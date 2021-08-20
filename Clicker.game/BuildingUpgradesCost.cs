@@ -11,21 +11,15 @@ namespace Clicker.Game
         public List<Resource> UpgradeCost { get; set; }
 
         public int UpgradeLevel { get; set; }
-        
-         
-        
+
+
+
         public BuildingUpgradesCost(int upgradeLevel, List<Resource> cost)
         {
 
             UpgradeLevel = upgradeLevel;
             UpgradeCost = cost;
 
-
         }
-
-
-
-
-
     }
 }

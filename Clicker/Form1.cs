@@ -15,11 +15,7 @@ namespace Clicker
     {
         //Basic resources
 
-        int woodQuantity = 1000;
-        int stoneQuantity = 1000;
-        int goldQuantity = 1000;
-
-        Random randResources = new Random();
+        
 
         //Upgrades
         int lumberBuilt = 0;
@@ -30,53 +26,27 @@ namespace Clicker
 
         //Workers
 
-        int lumberjack = 0;
-        int quarryman = 0;
-        int goldMiner = 0;
-        int population = 0;
-
-
-
         //Message Box
         string notEnoughResourcesMessage = "Oops, you don't have enough resources!";
-
-
-
 
         //Timer value
 
         int timerCount = 0;
-
+       
         private Game.Game game = new Game.Game();
+        
 
         public Clicker()
         {
             InitializeComponent();
+            
         }
 
         private void Button_ResourcesClick_Click(object sender, EventArgs e)
         {
-
+            
             game.GatherRandomResource();
-            //int value = randResources.Next(1, 100);
-            //if (value <= 40)
-            //{
-            //    woodQuantity++;
-            //    woodQuantity += lumberBuilt;
-            //    UpdateResourceCounter();
-            //}
-            //if (value > 40 && value <= 80)
-            //{
-            //    stoneQuantity++;
-            //    stoneQuantity += quaryBuilt;
-            //    UpdateResourceCounter();
-            //}
-            //if (value > 80)
-            //{
-            //    goldQuantity++;
-            //    goldQuantity += goldMineBuilt;
-            //    UpdateResourceCounter();
-            //}
+
         }
 
 
@@ -115,106 +85,44 @@ namespace Clicker
 
         private void HouseButtonUpgrade_Click(object sender, EventArgs e)
         {
-            //if (woodQuantity >= 100 * (housesBuilt + 1) && stoneQuantity >= 100 * (housesBuilt + 1))
-            //{
-            //    woodQuantity -= 100 * (housesBuilt + 1);
-            //    stoneQuantity -= 100 * (housesBuilt + 1);
-            //    housesBuilt++;
-            //    houseButtonUpgrade.Text = "House " + housesBuilt.ToString();
-            //    houseButtonUpgrade.BackColor = Color.Green;
-            //    UpdateResourceCounter();
-            //}
-            //else
-            //{
-            //    MessageBox.Show(notEnoughResourcesMessage);
-            //}
+            game.UpgradeHouse();
         }
 
         private void HouseButtonUpgrade_MouseHover(object sender, EventArgs e)
         {
-            houseToolTip.Show($"Increases the amount of workers you can hire by 10 for each upgrade. Cost: {100 * (housesBuilt + 1)} wood, {100 * (housesBuilt + 1)} stone ", houseButtonUpgrade);
+
         }
         //Methods
         private void Income()
         {
-            stoneQuantity += quarryman + quaryBuilt;
-            woodQuantity += lumberjack + lumberBuilt;
-            goldQuantity += goldMiner + goldMineBuilt;
-            labelGoldIncome.Text = $"{goldMiner + goldMineBuilt}/t";
-            labelLumberIncome.Text = $"{lumberjack + lumberBuilt}/t";
-            labelStoneIncome.Text = $"{quarryman + quaryBuilt}/t";
+            //stoneQuantity += quarryman + quaryBuilt;
+            //woodQuantity += lumberjack + lumberBuilt;
+            //goldQuantity += goldMiner + goldMineBuilt;
+            //labelGoldIncome.Text = $"{goldMiner + goldMineBuilt}/t";
+            //labelLumberIncome.Text = $"{lumberjack + lumberBuilt}/t";
+            //labelStoneIncome.Text = $"{quarryman + quaryBuilt}/t";
 
         }
         private void UpdateResourceCounter()
         {
-            goldLabel.Text = goldQuantity.ToString();
-            stoneLabel.Text = stoneQuantity.ToString();
-            woodLabel.Text = woodQuantity.ToString();
+            //goldLabel.Text = goldQuantity.ToString();
+            //stoneLabel.Text = stoneQuantity.ToString();
+            //woodLabel.Text = woodQuantity.ToString();
 
         }
 
         //Hire
         private void lumberjackButton_Click(object sender, EventArgs e)
         {
-            if ((housesBuilt * 10) > population && goldQuantity >= 50)
-            {
-                goldQuantity -= 50;
-                population++;
-                lumberjack++;
-                lumberjackButton.Text = "Lumberjack: " + lumberjack.ToString();
-                lumberjackButton.BackColor = Color.Green;
-                UpdateResourceCounter();
-            }
-            else if ((housesBuilt * 10) <= population)
-            {
-                MessageBox.Show("You have to build houses to hire more people");
-            }
-            else
-            {
-                MessageBox.Show(notEnoughResourcesMessage);
-            }
+            game.HireLumberjack();
         }
         private void quarrymanButton_Click(object sender, EventArgs e)
         {
-            if ((housesBuilt * 10) > population && goldQuantity >= 50)
-            {
-                goldQuantity -= 50;
-                population++;
-                quarryman++;
-                quarrymanButton.Text = "Quarryman: " + quarryman.ToString();
-                quarrymanButton.BackColor = Color.Green;
-                UpdateResourceCounter();
-            }
-            else if ((housesBuilt * 10) <= population)
-            {
-                MessageBox.Show("You have to build houses to hire more people");
-            }
-            else
-            {
-                MessageBox.Show(notEnoughResourcesMessage);
-            }
+            game.HireQuarryman();
         }
         private void goldMinerButton_Click(object sender, EventArgs e)
         {
-            if ((housesBuilt * 10) > population && woodQuantity >= 100 && stoneQuantity >= 100 && goldQuantity >= 50)
-            {
-                woodQuantity -= 100;
-                stoneQuantity -= 100;
-                goldQuantity -= 50;
-                population++;
-                goldMiner++;
-                goldMinerButton.Text = "Gold Miner: " + goldMiner.ToString();
-                goldMinerButton.BackColor = Color.Green;
-                UpdateResourceCounter();
-            }
-            else if ((housesBuilt * 10) <= population)
-            {
-                MessageBox.Show("You have to build houses to hire more people");
-            }
-            else
-            {
-                MessageBox.Show(notEnoughResourcesMessage);
-            }
+            game.HireGoldMiner();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -222,8 +130,7 @@ namespace Clicker
             timerCount++;
             if (timerCount % 20 == 0)
             {
-                Income();
-                UpdateResourceCounter();
+                game.ResourceProduction();
             }
         }
 
@@ -275,56 +182,25 @@ namespace Clicker
 
         private void LumberButtonUpgrade_Click(object sender, EventArgs e)
         {
-            if (stoneQuantity >= (lumberBuilt + 1) * 100 && woodQuantity >= (lumberBuilt + 1) * 100 && goldQuantity >= (lumberBuilt + 1) * 50)
-            {
-                stoneQuantity -= (lumberBuilt + 1) * 100;
-                woodQuantity -= (lumberBuilt + 1) * 100;
-                goldQuantity -= (lumberBuilt + 1) * 50;
-                lumberBuilt++;
-                UpdateResourceCounter();
+            game.UpgradeLumber();
+
                 lumberButtonUpgrade.BackColor = Color.Green;
-                lumberButtonUpgrade.Text = "Lumber lvl." + lumberBuilt.ToString();
-            }
-            else
-            {
-                MessageBox.Show(notEnoughResourcesMessage);
-            }
         }
 
         private void QuaryButtonUpgrade_Click(object sender, EventArgs e)
         {
-            if (stoneQuantity >= (quaryBuilt + 1) * 100 && woodQuantity >= (quaryBuilt + 1) * 100 && goldQuantity >= (quaryBuilt + 1) * 50)
-            {
-                stoneQuantity -= (quaryBuilt + 1) * 100;
-                woodQuantity -= (quaryBuilt + 1) * 100;
-                goldQuantity -= (quaryBuilt + 1) * 50;
-                quaryBuilt++;
-                UpdateResourceCounter();
+            game.UpgradeQuarry();
+
                 quaryButtonUpgrade.BackColor = Color.Green;
-                quaryButtonUpgrade.Text = "Quary lvl." + quaryBuilt.ToString();
-            }
-            else
-            {
-                MessageBox.Show(notEnoughResourcesMessage);
-            }
+                
+        
         }
 
         private void GoldMineButtonUpgrade_Click(object sender, EventArgs e)
         {
-            if (stoneQuantity >= (goldMineBuilt + 1) * 150 && woodQuantity >= (goldMineBuilt + 1) * 150 && goldQuantity >= (goldMineBuilt + 1) * 60)
-            {
-                stoneQuantity -= (goldMineBuilt + 1) * 150;
-                woodQuantity -= (goldMineBuilt + 1) * 150;
-                goldQuantity -= (goldMineBuilt + 1) * 60;
-                goldMineBuilt++;
-                UpdateResourceCounter();
-                goldMineButtonUpgrade.BackColor = Color.Green;
-                goldMineButtonUpgrade.Text = "Gold Mine lvl." + goldMineBuilt.ToString();
-            }
-            else
-            {
-                MessageBox.Show(notEnoughResourcesMessage);
-            }
+            game.UpgradeGoldMine();
+
+                
         }
 
         private void resourceButton_Click(object sender, EventArgs e)

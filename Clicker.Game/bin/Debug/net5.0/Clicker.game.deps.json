@@ -6,14 +6,6 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "Clicker.WinForms/1.0.0": {
-        "dependencies": {
-          "Clicker.game": "1.0.0"
-        },
-        "runtime": {
-          "Clicker.WinForms.dll": {}
-        }
-      },
       "Clicker.game/1.0.0": {
         "runtime": {
           "Clicker.game.dll": {}
@@ -22,11 +14,6 @@
     }
   },
   "libraries": {
-    "Clicker.WinForms/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "Clicker.game/1.0.0": {
       "type": "project",
       "serviceable": false,

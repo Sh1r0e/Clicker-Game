@@ -23,10 +23,7 @@ namespace Clicker.Game
             }
         }
 
-        
-
         public List<BuildingUpgradesCost> UpgradesCosts;
-
 
         public Building(int currentLevel, List<BuildingUpgradesCost> upgradesCosts)
         {
@@ -35,16 +32,5 @@ namespace Clicker.Game
 
 
         }
-        
-
-        
-
-
-
-
-
-
-
-
     }
 }

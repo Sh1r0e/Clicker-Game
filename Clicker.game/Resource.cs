@@ -11,35 +11,12 @@ namespace Clicker.Game
 
     public class Resource
     {
-        private ResourceType resourceType;
-        public ResourceType ResourceType
-        {
-            get
-            {
-                return resourceType;
-            }
-            set
-            {
-                value = resourceType;
-            }
-        }
-        private int quantity;
-        public int Quantity
-        {
-            get
-            {
-                return quantity;
-            }
-            set
-            {
-                value = quantity;
-            }
 
-        }
-        public Resource()
-        {
+        public ResourceType ResourceType { get; set; }
 
-        }
+
+        public int Quantity { get; set; }
+
         public Resource(ResourceType resourceType, int quantity)
         {
             ResourceType = resourceType;

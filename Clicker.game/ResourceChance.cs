@@ -8,7 +8,7 @@ namespace Clicker.Game
 {
     class ResourceChance : Resource
     {
-        private int chance;
+      
         public int Chance { get; set; }
 
         public ResourceChance(int chance, ResourceType resourceType, int quantity):base(resourceType, quantity)

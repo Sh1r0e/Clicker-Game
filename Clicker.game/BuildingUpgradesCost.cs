@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clicker.Game
 {
-    class BuildingUpgradesCost
+    public class BuildingUpgradesCost
     {
         public List<Resource> UpgradeCost { get; set; }
 

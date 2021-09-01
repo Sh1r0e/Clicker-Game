@@ -69,17 +69,11 @@ namespace Clicker
             this.panel2 = new System.Windows.Forms.Panel();
             this.buttonMenu = new System.Windows.Forms.Button();
             this.hirePanel = new System.Windows.Forms.Panel();
-            this.goldMinerButton = new System.Windows.Forms.Button();
-            this.quarrymanButton = new System.Windows.Forms.Button();
-            this.lumberjackButton = new System.Windows.Forms.Button();
+            
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.hireButton = new System.Windows.Forms.Button();
             this.buildPanel = new System.Windows.Forms.Panel();
-            this.goldMineButtonUpgrade = new System.Windows.Forms.Button();
-            this.quaryButtonUpgrade = new System.Windows.Forms.Button();
-            this.lumberButtonUpgrade = new System.Windows.Forms.Button();
-            this.houseButtonUpgrade = new System.Windows.Forms.Button();
             this.buildButton = new System.Windows.Forms.Button();
             this.panelResourceIncome = new System.Windows.Forms.Panel();
             this.labelGoldIncome = new System.Windows.Forms.Label();
@@ -88,21 +82,15 @@ namespace Clicker
             this.pictureBoxGoldMine = new System.Windows.Forms.PictureBox();
             this.pictureBoxQuarry = new System.Windows.Forms.PictureBox();
             this.pictureBoxLumber = new System.Windows.Forms.PictureBox();
-            this.houseToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.lumberjackToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.quarrymanToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.goldMinerToolTip = new System.Windows.Forms.ToolTip(this.components);
+            
             this.lumberPicToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.quarryPicToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.goldMinePicToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.lumberToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.quaryToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.goldMineToolTip = new System.Windows.Forms.ToolTip(this.components);
+            
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.hirePanel.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.buildPanel.SuspendLayout();
             this.panelResourceIncome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGoldMine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxQuarry)).BeginInit();
@@ -427,9 +415,6 @@ namespace Clicker
             // hirePanel
             // 
             this.hirePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.hirePanel.Controls.Add(this.goldMinerButton);
-            this.hirePanel.Controls.Add(this.quarrymanButton);
-            this.hirePanel.Controls.Add(this.lumberjackButton);
             this.hirePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.hirePanel.Location = new System.Drawing.Point(0, 302);
             this.hirePanel.Name = "hirePanel";
@@ -437,50 +422,7 @@ namespace Clicker
             this.hirePanel.TabIndex = 3;
             this.hirePanel.Visible = false;
             // 
-            // goldMinerButton
-            // 
-            this.goldMinerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.goldMinerButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.goldMinerButton.Font = new System.Drawing.Font("Tempus Sans ITC", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.goldMinerButton.Location = new System.Drawing.Point(0, 80);
-            this.goldMinerButton.Name = "goldMinerButton";
-            this.goldMinerButton.Size = new System.Drawing.Size(196, 40);
-            this.goldMinerButton.TabIndex = 2;
-            this.goldMinerButton.Text = "Gold miner";
-            this.goldMinerButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.goldMinerButton.UseVisualStyleBackColor = false;
-            this.goldMinerButton.Click += new System.EventHandler(this.goldMinerButton_Click);
-            this.goldMinerButton.MouseHover += new System.EventHandler(this.GoldMinerButton_MouseHover);
-            // 
-            // quarrymanButton
-            // 
-            this.quarrymanButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.quarrymanButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.quarrymanButton.Font = new System.Drawing.Font("Tempus Sans ITC", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.quarrymanButton.Location = new System.Drawing.Point(0, 40);
-            this.quarrymanButton.Name = "quarrymanButton";
-            this.quarrymanButton.Size = new System.Drawing.Size(196, 40);
-            this.quarrymanButton.TabIndex = 1;
-            this.quarrymanButton.Text = "Quarryman";
-            this.quarrymanButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.quarrymanButton.UseVisualStyleBackColor = false;
-            this.quarrymanButton.Click += new System.EventHandler(this.quarrymanButton_Click);
-            this.quarrymanButton.MouseHover += new System.EventHandler(this.QuarrymanButton_MouseHover);
-            // 
-            // lumberjackButton
-            // 
-            this.lumberjackButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.lumberjackButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lumberjackButton.Font = new System.Drawing.Font("Tempus Sans ITC", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lumberjackButton.Location = new System.Drawing.Point(0, 0);
-            this.lumberjackButton.Name = "lumberjackButton";
-            this.lumberjackButton.Size = new System.Drawing.Size(196, 40);
-            this.lumberjackButton.TabIndex = 0;
-            this.lumberjackButton.Text = "Lumberjack";
-            this.lumberjackButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lumberjackButton.UseVisualStyleBackColor = false;
-            this.lumberjackButton.Click += new System.EventHandler(this.lumberjackButton_Click);
-            this.lumberjackButton.MouseHover += new System.EventHandler(this.LumberjackButton_MouseHover);
+           
             // 
             // panel4
             // 
@@ -517,76 +459,12 @@ namespace Clicker
             // buildPanel
             // 
             this.buildPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buildPanel.Controls.Add(this.goldMineButtonUpgrade);
-            this.buildPanel.Controls.Add(this.quaryButtonUpgrade);
-            this.buildPanel.Controls.Add(this.lumberButtonUpgrade);
-            this.buildPanel.Controls.Add(this.houseButtonUpgrade);
             this.buildPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.buildPanel.Location = new System.Drawing.Point(0, 65);
             this.buildPanel.Name = "buildPanel";
             this.buildPanel.Size = new System.Drawing.Size(196, 172);
             this.buildPanel.TabIndex = 1;
             this.buildPanel.Visible = false;
-            // 
-            // goldMineButtonUpgrade
-            // 
-            this.goldMineButtonUpgrade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.goldMineButtonUpgrade.Dock = System.Windows.Forms.DockStyle.Top;
-            this.goldMineButtonUpgrade.Font = new System.Drawing.Font("Tempus Sans ITC", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.goldMineButtonUpgrade.Location = new System.Drawing.Point(0, 131);
-            this.goldMineButtonUpgrade.Name = "goldMineButtonUpgrade";
-            this.goldMineButtonUpgrade.Size = new System.Drawing.Size(196, 40);
-            this.goldMineButtonUpgrade.TabIndex = 3;
-            this.goldMineButtonUpgrade.Text = "Gold Mine lvl. 1";
-            this.goldMineButtonUpgrade.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.goldMineButtonUpgrade.UseVisualStyleBackColor = false;
-            this.goldMineButtonUpgrade.Click += new System.EventHandler(this.GoldMineButtonUpgrade_Click);
-            this.goldMineButtonUpgrade.MouseHover += new System.EventHandler(this.goldMineButtonUpgrade_MouseHover);
-            // 
-            // quaryButtonUpgrade
-            // 
-            this.quaryButtonUpgrade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.quaryButtonUpgrade.Dock = System.Windows.Forms.DockStyle.Top;
-            this.quaryButtonUpgrade.Font = new System.Drawing.Font("Tempus Sans ITC", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.quaryButtonUpgrade.Location = new System.Drawing.Point(0, 91);
-            this.quaryButtonUpgrade.Name = "quaryButtonUpgrade";
-            this.quaryButtonUpgrade.Size = new System.Drawing.Size(196, 40);
-            this.quaryButtonUpgrade.TabIndex = 2;
-            this.quaryButtonUpgrade.Text = "Quary lvl. 1";
-            this.quaryButtonUpgrade.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.quaryButtonUpgrade.UseVisualStyleBackColor = false;
-            this.quaryButtonUpgrade.Click += new System.EventHandler(this.QuaryButtonUpgrade_Click);
-            this.quaryButtonUpgrade.MouseHover += new System.EventHandler(this.quaryButtonUpgrade_MouseHover);
-            // 
-            // lumberButtonUpgrade
-            // 
-            this.lumberButtonUpgrade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.lumberButtonUpgrade.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lumberButtonUpgrade.Font = new System.Drawing.Font("Tempus Sans ITC", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lumberButtonUpgrade.Location = new System.Drawing.Point(0, 51);
-            this.lumberButtonUpgrade.Name = "lumberButtonUpgrade";
-            this.lumberButtonUpgrade.Size = new System.Drawing.Size(196, 40);
-            this.lumberButtonUpgrade.TabIndex = 1;
-            this.lumberButtonUpgrade.Text = "Lumber lvl. 1";
-            this.lumberButtonUpgrade.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lumberButtonUpgrade.UseVisualStyleBackColor = false;
-            this.lumberButtonUpgrade.Click += new System.EventHandler(this.LumberButtonUpgrade_Click);
-            this.lumberButtonUpgrade.MouseHover += new System.EventHandler(this.lumberButtonUpgrade_MouseHover);
-            // 
-            // houseButtonUpgrade
-            // 
-            this.houseButtonUpgrade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.houseButtonUpgrade.Dock = System.Windows.Forms.DockStyle.Top;
-            this.houseButtonUpgrade.Font = new System.Drawing.Font("Tempus Sans ITC", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.houseButtonUpgrade.Location = new System.Drawing.Point(0, 0);
-            this.houseButtonUpgrade.Name = "houseButtonUpgrade";
-            this.houseButtonUpgrade.Size = new System.Drawing.Size(196, 51);
-            this.houseButtonUpgrade.TabIndex = 0;
-            this.houseButtonUpgrade.Text = "House";
-            this.houseButtonUpgrade.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.houseButtonUpgrade.UseVisualStyleBackColor = false;
-            this.houseButtonUpgrade.Click += new System.EventHandler(this.HouseButtonUpgrade_Click);
-            this.houseButtonUpgrade.MouseHover += new System.EventHandler(this.HouseButtonUpgrade_MouseHover);
             // 
             // buildButton
             // 
@@ -708,7 +586,6 @@ namespace Clicker
             this.panel2.ResumeLayout(false);
             this.hirePanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            this.buildPanel.ResumeLayout(false);
             this.panelResourceIncome.ResumeLayout(false);
             this.panelResourceIncome.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGoldMine)).EndInit();
@@ -755,23 +632,13 @@ namespace Clicker
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel buildPanel;
-        private System.Windows.Forms.Button goldMineButtonUpgrade;
-        private System.Windows.Forms.Button quaryButtonUpgrade;
-        private System.Windows.Forms.Button lumberButtonUpgrade;
-        private System.Windows.Forms.Button houseButtonUpgrade;
         private System.Windows.Forms.Button buildButton;
         private System.Windows.Forms.Panel panelResourceIncome;
         private System.Windows.Forms.Panel hirePanel;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button hireButton;
-        private System.Windows.Forms.Button goldMinerButton;
-        private System.Windows.Forms.Button quarrymanButton;
-        private System.Windows.Forms.Button lumberjackButton;
-        private System.Windows.Forms.ToolTip houseToolTip;
-        private System.Windows.Forms.ToolTip lumberjackToolTip;
-        private System.Windows.Forms.ToolTip quarrymanToolTip;
-        private System.Windows.Forms.ToolTip goldMinerToolTip;
+
         private System.Windows.Forms.Label labelGoldIncome;
         private System.Windows.Forms.Label labelStoneIncome;
         private System.Windows.Forms.Label labelLumberIncome;
@@ -784,9 +651,7 @@ namespace Clicker
         private System.Windows.Forms.PictureBox pictureBoxGoldMine;
         private System.Windows.Forms.Button resourceButton;
         private System.Windows.Forms.Button buttonMenu;
-        private System.Windows.Forms.ToolTip lumberToolTip;
-        private System.Windows.Forms.ToolTip quaryToolTip;
-        private System.Windows.Forms.ToolTip goldMineToolTip;
+
     }
 }
 

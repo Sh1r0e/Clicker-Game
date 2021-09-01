@@ -13,16 +13,7 @@ namespace Clicker
 {
     public partial class Clicker : Form
     {
-        //Basic resources
-
         
-
-        //Upgrades
-        int lumberBuilt = 0;
-        int quaryBuilt = 0;
-        int goldMineBuilt = 0;
-
-        int housesBuilt = 0;
 
         //Workers
 
@@ -35,18 +26,55 @@ namespace Clicker
        
         private Game.Game game = new Game.Game();
         
+        
+        
 
         public Clicker()
         {
             InitializeComponent();
-            
+            BuildingButtons();
+            HireButtons();
         }
 
         private void Button_ResourcesClick_Click(object sender, EventArgs e)
         {
-            
-            game.GatherRandomResource();
 
+            game.GatherRandomResource();
+            Income();
+
+        }
+        private void HireButtons()
+        {
+            var workers = game.GetWorkers();
+
+            foreach (var worker in workers)
+            {
+
+                Button workerButton = new Button();
+                hirePanel.Controls.Add(workerButton);
+                workerButton.Dock = DockStyle.Top;
+                workerButton.Text = worker.Name;
+                workerButton.AutoSize = true;
+                workerButton.BackColor = Color.FromArgb(220, 112, 113);
+
+            }
+        }
+        private void BuildingButtons()
+        {
+            
+            var buildings = game.GetBuildings();
+
+            foreach (var building in buildings)
+            {
+
+                Button buildingButton = new Button();
+                buildPanel.Controls.Add(buildingButton);
+                buildingButton.Dock = DockStyle.Top;
+                buildingButton.Text = building.Name;
+                buildingButton.AutoSize = true;
+                buildingButton.BackColor = Color.FromArgb(220, 112, 113);
+
+            }
         }
 
 
@@ -83,47 +111,48 @@ namespace Clicker
             }
         }
 
-        private void HouseButtonUpgrade_Click(object sender, EventArgs e)
-        {
-            game.UpgradeHouse();
-        }
+        //private void HouseButtonUpgrade_Click(object sender, EventArgs e)
+        //{
+        //    game.UpgradeHouse();
+        //}
 
-        private void HouseButtonUpgrade_MouseHover(object sender, EventArgs e)
-        {
+        //private void HouseButtonUpgrade_MouseHover(object sender, EventArgs e)
+        //{
 
-        }
+        //}
         //Methods
         private void Income()
         {
-            //stoneQuantity += quarryman + quaryBuilt;
-            //woodQuantity += lumberjack + lumberBuilt;
-            //goldQuantity += goldMiner + goldMineBuilt;
-            //labelGoldIncome.Text = $"{goldMiner + goldMineBuilt}/t";
-            //labelLumberIncome.Text = $"{lumberjack + lumberBuilt}/t";
-            //labelStoneIncome.Text = $"{quarryman + quaryBuilt}/t";
+            var playerResource = game.GetResources();
+            var wood = playerResource.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+            var woodQuantity = wood.Quantity;
+
+            var stone = playerResource.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+            var stoneQuantity = stone.Quantity;
+
+            var gold = playerResource.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+            var goldQuantity = gold.Quantity;
+
+            goldLabel.Text = goldQuantity.ToString();
+            woodLabel.Text = woodQuantity.ToString();
+            stoneLabel.Text = stoneQuantity.ToString();
 
         }
-        private void UpdateResourceCounter()
-        {
-            //goldLabel.Text = goldQuantity.ToString();
-            //stoneLabel.Text = stoneQuantity.ToString();
-            //woodLabel.Text = woodQuantity.ToString();
 
-        }
 
         //Hire
-        private void lumberjackButton_Click(object sender, EventArgs e)
-        {
-            game.HireLumberjack();
-        }
-        private void quarrymanButton_Click(object sender, EventArgs e)
-        {
-            game.HireQuarryman();
-        }
-        private void goldMinerButton_Click(object sender, EventArgs e)
-        {
-            game.HireGoldMiner();
-        }
+        //private void lumberjackButton_Click(object sender, EventArgs e)
+        //{
+        //    game.HireLumberjack();
+        //}
+        //private void quarrymanButton_Click(object sender, EventArgs e)
+        //{
+        //    game.HireQuarryman();
+        //}
+        //private void goldMinerButton_Click(object sender, EventArgs e)
+        //{
+        //    game.HireGoldMiner();
+        //}
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -131,6 +160,7 @@ namespace Clicker
             if (timerCount % 20 == 0)
             {
                 game.ResourceProduction();
+                Income();
             }
         }
 
@@ -149,59 +179,57 @@ namespace Clicker
         {
             goldMinePicToolTip.Show("Shows current gold income per tick", pictureBoxGoldMine);
         }
-        private void LumberjackButton_MouseHover(object sender, EventArgs e)
-        {
-            lumberjackToolTip.Show("Cost: 50 gold", lumberjackButton);
-        }
+        //private void LumberjackButton_MouseHover(object sender, EventArgs e)
+        //{
+        //    lumberjackToolTip.Show("Cost: 50 gold", lumberjackButton);
+        //}
 
-        private void QuarrymanButton_MouseHover(object sender, EventArgs e)
-        {
-            quarrymanToolTip.Show("Cost: 50 gold", quarrymanButton);
-        }
+        //private void QuarrymanButton_MouseHover(object sender, EventArgs e)
+        //{
+        //    quarrymanToolTip.Show("Cost: 50 gold", quarrymanButton);
+        //}
 
-        private void GoldMinerButton_MouseHover(object sender, EventArgs e)
-        {
-            goldMinerToolTip.Show("Cost: 100 wood, 100 stone, 50 gold", goldMinerButton);
-        }
-        private void lumberButtonUpgrade_MouseHover(object sender, EventArgs e)
-        {
-            lumberToolTip.Show($"Cost: {(lumberBuilt + 1) * 100} wood, {(lumberBuilt + 1) * 100} stone, {(lumberBuilt + 1) * 50} gold. Increases the amount of wood gathered by click and passive income", lumberButtonUpgrade);
-        }
+        //private void GoldMinerButton_MouseHover(object sender, EventArgs e)
+        //{
+        //    goldMinerToolTip.Show("Cost: 100 wood, 100 stone, 50 gold", goldMinerButton);
+        //}
+        //private void lumberButtonUpgrade_MouseHover(object sender, EventArgs e)
+        //{
 
-        private void quaryButtonUpgrade_MouseHover(object sender, EventArgs e)
-        {
-            quaryToolTip.Show($"Cost: {(quaryBuilt + 1 * 100)} wood, {(quaryBuilt + 1) * 100} stone, {(quaryBuilt + 1) * 50} gold. Increases the amount of stone gathered by click and passive income", quaryButtonUpgrade);
-        }
+        //}
 
-        private void goldMineButtonUpgrade_MouseHover(object sender, EventArgs e)
-        {
-            goldMineToolTip.Show($"Cost: {(goldMineBuilt + 1) * 150} wood, {(goldMineBuilt + 1) * 150} stone, {(goldMineBuilt + 1) * 50} gold. Increases the amount of gold gathered by click and passive income", goldMineButtonUpgrade);
-        }
+        //private void quaryButtonUpgrade_MouseHover(object sender, EventArgs e)
+        //{
 
+        //}
+        //private void goldMineButtonUpgrade_MouseHover(object sender, EventArgs e)
+        //{
+
+        //}
         //Build Upgrades
 
-        private void LumberButtonUpgrade_Click(object sender, EventArgs e)
-        {
-            game.UpgradeLumber();
+        //private void LumberButtonUpgrade_Click(object sender, EventArgs e)
+        //{
+        //    game.UpgradeLumber();
 
-                lumberButtonUpgrade.BackColor = Color.Green;
-        }
+        //        lumberButtonUpgrade.BackColor = Color.Green;
+        //}
 
-        private void QuaryButtonUpgrade_Click(object sender, EventArgs e)
-        {
-            game.UpgradeQuarry();
+        //private void QuaryButtonUpgrade_Click(object sender, EventArgs e)
+        //{
+        //    game.UpgradeQuarry();
 
-                quaryButtonUpgrade.BackColor = Color.Green;
+        //        quaryButtonUpgrade.BackColor = Color.Green;
                 
         
-        }
+        //}
 
-        private void GoldMineButtonUpgrade_Click(object sender, EventArgs e)
-        {
-            game.UpgradeGoldMine();
+        //private void GoldMineButtonUpgrade_Click(object sender, EventArgs e)
+        //{
+        //    game.UpgradeGoldMine();
 
                 
-        }
+        //}
 
         private void resourceButton_Click(object sender, EventArgs e)
         {

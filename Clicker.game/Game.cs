@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Clicker.game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +21,7 @@ namespace Clicker.Game
 
             Random random = randResources;
             buildings.Add(
-                new House(
+                new House("House",
                     0,
                     0,
                     new List<BuildingUpgradesCost>()
@@ -38,11 +39,8 @@ namespace Clicker.Game
                     }
                     )
                 );
-
-
-
-            buildings.Add(new Lumber(0,
-                0,
+            buildings.Add(new Lumber("Lumber",0,
+                0, ResourceType.Wood,
                 new List<BuildingUpgradesCost>()
                 {
                 new BuildingUpgradesCost(1, new List<Resource>()
@@ -61,8 +59,8 @@ namespace Clicker.Game
 
                 }
               ));
-            buildings.Add(new Quarry(0,
-                0,
+            buildings.Add(new Quarry("Quarry",0,
+                0, ResourceType.Stone,
                 new List<BuildingUpgradesCost>()
                 {
                 new BuildingUpgradesCost(1, new List<Resource>()
@@ -81,8 +79,8 @@ namespace Clicker.Game
 
                 }
               ));
-            buildings.Add(new GoldMine(0,
-                0,
+            buildings.Add(new GoldMine("Gold mine",0,
+                0, ResourceType.Gold,
                 new List<BuildingUpgradesCost>()
                 {
                 new BuildingUpgradesCost(1, new List<Resource>()
@@ -102,19 +100,19 @@ namespace Clicker.Game
                 }
               ));
 
-            workers.Add(new Worker(1, 0, Worker.Job.Lumberjack, new List<Resource>()
+            workers.Add(new Worker("Lumberjack", 1, 0, Worker.Job.Lumberjack, new List<Resource>()
             {
                 new Resource(ResourceType.Wood, 250),
                 new Resource(ResourceType.Stone, 250),
                 new Resource(ResourceType.Gold, 100)
             }));
-            workers.Add(new Worker(1, 0, Worker.Job.Quarryman, new List<Resource>()
+            workers.Add(new Worker("Quarryman", 1, 0, Worker.Job.Quarryman, new List<Resource>()
             {
                 new Resource(ResourceType.Wood, 250),
                 new Resource(ResourceType.Stone, 250),
                 new Resource(ResourceType.Gold, 100)
             }));
-            workers.Add(new Worker(1, 0, Worker.Job.GoldMiner, new List<Resource>()
+            workers.Add(new Worker("Gold miner",1, 0, Worker.Job.GoldMiner, new List<Resource>()
             {
                 new Resource(ResourceType.Wood, 250),
                 new Resource(ResourceType.Stone, 250),
@@ -127,8 +125,18 @@ namespace Clicker.Game
 
         }
 
-     
-
+        public List<Building> GetBuildings()
+        {
+            return buildings;
+        }
+        public List<Worker> GetWorkers()
+        {
+            return workers;
+        }
+        public List<ResourceChance> GetResources()
+        {
+            return playerResources;
+        }
         public void GatherRandomResource()
         {
             int randomChance = randResources.Next(1, 100);
@@ -141,34 +149,15 @@ namespace Clicker.Game
         }
         public void ResourceProduction()
         {
-            var buildingLumber = buildings.FirstOrDefault(x => x is Lumber);
-            var lumber = buildingLumber as Lumber;
-            var wood = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-
-            if(lumber.Production > 0)
+            
+            var productionBuildings = buildings.OfType<ProductionBuilding>();
+            foreach (var building in productionBuildings)
             {
-                wood.Quantity = +lumber.Production;
-
-            }
-
-            var buildingQuarry = buildings.FirstOrDefault(x => x is Quarry);
-            var quarry = buildingQuarry as Quarry;
-            var stone = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-
-            if(quarry.Production > 0)
-            {
-                stone.Quantity = +quarry.Production;
-
-            }
-
-            var buildingGoldMine = buildings.FirstOrDefault(x => x is GoldMine);
-            var goldMine = buildingGoldMine as GoldMine;
-            var gold = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-
-            if(goldMine.Production > 0)
-            {
-                gold.Quantity = +goldMine.Production;
-
+                var resource = playerResources.FirstOrDefault(x => x.ResourceType == building.ResourceType);
+                if(building.Production > 0)
+                {
+                    resource.Quantity = +building.Production;
+                }
             }
 
         }
@@ -283,9 +272,6 @@ namespace Clicker.Game
             var gold_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
             var goldCost_1 = gold_1.Quantity;
 
-           
-
-
             var playerResourceWood = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
             var playerWoodQuantity = playerResourceWood.Quantity;
             var playerResourceStone = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
@@ -300,9 +286,7 @@ namespace Clicker.Game
                 playerWoodQuantity = -woodCost_1;
                 playerStoneQuantity = -stoneCost_1;
                 playerGoldQuantity = -goldCost_1;
-            }
-          
-            
+            }         
         }
         public void UpgradeLumber()
         {

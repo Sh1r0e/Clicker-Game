@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clicker.Game
 {
-    class ResourceChance : Resource
+    public class ResourceChance : Resource
     {
       
         public int Chance { get; set; }

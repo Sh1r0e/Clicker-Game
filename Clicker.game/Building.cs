@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Clicker.Game
 {
-    class Building
+    public class Building
     {
-        
+        private string name;
+        public string Name { get; set; }
         private int currentLevel;
         public int CurrentLevel
         {
@@ -25,10 +26,11 @@ namespace Clicker.Game
 
         public List<BuildingUpgradesCost> UpgradesCosts;
 
-        public Building(int currentLevel, List<BuildingUpgradesCost> upgradesCosts)
+        public Building(string name, int currentLevel, List<BuildingUpgradesCost> upgradesCosts)
         {
             CurrentLevel = currentLevel;
             UpgradesCosts = upgradesCosts;
+            Name = name;
 
 
         }

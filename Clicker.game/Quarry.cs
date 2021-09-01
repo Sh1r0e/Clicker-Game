@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Clicker.game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,27 +7,18 @@ using System.Threading.Tasks;
 
 namespace Clicker.Game
 {
-    class Quarry : Building
+    class Quarry : ProductionBuilding
     {
-        private int production;
+       
 
-        public int Production
+        public Quarry(string name, int currentLevel, int production, ResourceType resourceType, List<BuildingUpgradesCost> upgradesCosts) : base(name, currentLevel, production, resourceType, upgradesCosts)
         {
-            get
-            {
-                return production;
-            }
-            set
-            {
-                value = production;
-            }
-        }
-
-        public Quarry(int currentLevel, int production, List<BuildingUpgradesCost> upgradesCosts) : base(currentLevel, upgradesCosts)
-        {
+            
             CurrentLevel = currentLevel;
             Production = production;
             UpgradesCosts = upgradesCosts;
+            ResourceType = resourceType;
+            Name = name;
         }
     }
 }

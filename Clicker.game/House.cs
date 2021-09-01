@@ -21,11 +21,12 @@ namespace Clicker.Game
             }
         }
 
-        public House(int currentLevel, int populationCap, List<BuildingUpgradesCost> upgradesCosts) : base(currentLevel, upgradesCosts)
+        public House(string name, int currentLevel, int populationCap, List<BuildingUpgradesCost> upgradesCosts) : base(name, currentLevel, upgradesCosts)
         {
             CurrentLevel = currentLevel;
             PopulationCap = populationCap;
             UpgradesCosts = upgradesCosts;
+            Name = name;
         }
     }
 }

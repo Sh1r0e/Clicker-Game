@@ -12,6 +12,7 @@ namespace Clicker.Game
         List<ResourceChance> playerResources = new List<ResourceChance>();
         List<Worker> workers = new List<Worker>();
         Random randResources = new Random();
+        Dictionary<ResourceType, int> playerResourcesDictionary;
 
 
         //implementacja upgradelisty todo
@@ -123,6 +124,17 @@ namespace Clicker.Game
             playerResources.Add(new ResourceChance(100, ResourceType.Wood, 0));
             playerResources.Add(new ResourceChance(20, ResourceType.Gold, 0));
 
+            playerResourcesDictionary = playerResources.ToDictionary(x => x.ResourceType, x => x.Quantity);
+
+        }
+
+        public void UpgradeBuilding(Building building)
+        {
+            //IS upgradable
+            // if true,
+
+
+            throw new NotImplementedException();
         }
 
         public List<Building> GetBuildings()
@@ -257,6 +269,11 @@ namespace Clicker.Game
                 goldMiner.HiredWorkers++;
             }
         }
+        public ResourceChance GetResourceByType(ResourceType type) => playerResources.FirstOrDefault(x => x.ResourceType == type);
+
+
+        public bool CanAfford(ResourceType type, int amount) => GetResourceByType(type).Quantity > amount;
+        
         public void UpgradeHouse()
         {
             var building = buildings.FirstOrDefault(x => x is House);
@@ -264,29 +281,49 @@ namespace Clicker.Game
             var currentLevel = buildingHouse.CurrentLevel;
             var populationCap = buildingHouse.PopulationCap;
 
-            var upgradeLevel_1 = buildingHouse.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 1);
-            var wood_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-            var woodCost_1 = wood_1.Quantity;
-            var stone_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-            var stoneCost_1 = stone_1.Quantity;
-            var gold_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-            var goldCost_1 = gold_1.Quantity;
-
-            var playerResourceWood = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-            var playerWoodQuantity = playerResourceWood.Quantity;
-            var playerResourceStone = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-            var playerStoneQuantity = playerResourceStone.Quantity;
-            var playerResourceGold = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-            var playerGoldQuantity = playerResourceGold.Quantity;
-
-            if (currentLevel < upgradeLevel_1.UpgradeLevel && playerWoodQuantity >= woodCost_1 && playerStoneQuantity >= stoneCost_1 && playerGoldQuantity >= goldCost_1)
+            var cost = buildingHouse.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel > currentLevel);
+            if (cost.UpgradeCost.Any(upgradeCost => !CanAfford(upgradeCost.ResourceType, upgradeCost.Quantity)))
             {
+                //display message - sorry not enough resources
+
+                return;
+            }
+            else
+            {
+                foreach (var upgradeCost in cost.UpgradeCost)
+                {
+                    var playerResource = GetResourceByType(upgradeCost.ResourceType);
+                    playerResource.Quantity -= upgradeCost.Quantity;
+                }
+                populationCap += 10;
                 currentLevel++;
-                populationCap = +10;
-                playerWoodQuantity = -woodCost_1;
-                playerStoneQuantity = -stoneCost_1;
-                playerGoldQuantity = -goldCost_1;
-            }         
+            }
+        //    var upgradeLevel_1 = buildingHouse.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 1);
+        //    var wood_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+        //    var woodCost_1 = wood_1.Quantity;
+        //    var stone_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+        //    var stoneCost_1 = stone_1.Quantity;
+        //    var gold_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+        //    var goldCost_1 = gold_1.Quantity;
+
+
+        //    var wood = playerResourcesDictionary[ResourceType.Wood];
+
+        //    var playerResourceWood = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+        //    var playerWoodQuantity = playerResourceWood.Quantity;
+        //    var playerResourceStone = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+        //    var playerStoneQuantity = playerResourceStone.Quantity;
+        //    var playerResourceGold = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+        //    var playerGoldQuantity = playerResourceGold.Quantity;
+
+        //    if (currentLevel < upgradeLevel_1.UpgradeLevel && playerWoodQuantity >= woodCost_1 && playerStoneQuantity >= stoneCost_1 && playerGoldQuantity >= goldCost_1)
+        //    {
+        //        currentLevel++;
+        //        populationCap = +10;
+        //        playerWoodQuantity = -woodCost_1;
+        //        playerStoneQuantity = -stoneCost_1;
+        //        playerGoldQuantity = -goldCost_1;
+        //    }         
         }
         public void UpgradeLumber()
         {
@@ -295,46 +332,64 @@ namespace Clicker.Game
             var currentLevel = buildingLumber.CurrentLevel;
             var production = buildingLumber.Production;
 
-            var upgradeLevel_1 = buildingLumber.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 1);
-            var wood_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-            var woodCost_1 = wood_1.Quantity;
-            var stone_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-            var stoneCost_1 = stone_1.Quantity;
-            var gold_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-            var goldCost_1 = gold_1.Quantity;
-
-            var upgradeLevel_2 = buildingLumber.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 2);
-            var wood_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-            var woodCost_2 = wood_2.Quantity;
-            var stone_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-            var stoneCost_2 = stone_2.Quantity;
-            var gold_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-            var goldCost_2 = gold_2.Quantity;
-
-
-            var playerResourceWood = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-            var playerWoodQuantity = playerResourceWood.Quantity;
-            var playerResourceStone = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-            var playerStoneQuantity = playerResourceStone.Quantity;
-            var playerResourceGold = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-            var playerGoldQuantity = playerResourceGold.Quantity;
-
-            if (currentLevel < upgradeLevel_1.UpgradeLevel && playerWoodQuantity >= woodCost_1 && playerStoneQuantity >= stoneCost_1 && playerGoldQuantity >= goldCost_1)
+            var cost = buildingLumber.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel > currentLevel);
+            if (cost.UpgradeCost.Any(upgradeCost => !CanAfford(upgradeCost.ResourceType, upgradeCost.Quantity)))
             {
-                currentLevel++;
-                production = +1;
-                playerWoodQuantity = -woodCost_1;
-                playerStoneQuantity = -stoneCost_1;
-                playerGoldQuantity = -goldCost_1;
+                //display message - sorry not enough resources
+
+                return;
             }
-            if (currentLevel < upgradeLevel_2.UpgradeLevel && playerWoodQuantity >= woodCost_2 && playerStoneQuantity >= stoneCost_2 && playerGoldQuantity >= goldCost_2)
+            else
             {
+                foreach (var upgradeCost in cost.UpgradeCost)
+                {
+                    var playerResource = GetResourceByType(upgradeCost.ResourceType);
+                    playerResource.Quantity -= upgradeCost.Quantity;
+                }
+                production++;
                 currentLevel++;
-                production = +1;
-                playerWoodQuantity = -woodCost_2;
-                playerStoneQuantity = -stoneCost_2;
-                playerGoldQuantity = -goldCost_2;
             }
+
+            //var upgradeLevel_1 = buildingLumber.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 1); //FOREACH
+            //var wood_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+            //var woodCost_1 = wood_1.Quantity;
+            //var stone_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+            //var stoneCost_1 = stone_1.Quantity;
+            //var gold_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+            //var goldCost_1 = gold_1.Quantity;
+
+            //var upgradeLevel_2 = buildingLumber.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 2);
+            //var wood_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+            //var woodCost_2 = wood_2.Quantity;
+            //var stone_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+            //var stoneCost_2 = stone_2.Quantity;
+            //var gold_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+            //var goldCost_2 = gold_2.Quantity; //endl
+
+
+            //var playerResourceWood = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+            //var playerWoodQuantity = playerResourceWood.Quantity;
+            //var playerResourceStone = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+            //var playerStoneQuantity = playerResourceStone.Quantity;
+            //var playerResourceGold = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+            //var playerGoldQuantity = playerResourceGold.Quantity;
+
+            //if (currentLevel < upgradeLevel_1.UpgradeLevel && playerWoodQuantity >= woodCost_1 && playerStoneQuantity >= stoneCost_1 && playerGoldQuantity >= goldCost_1)
+            //{
+            //    currentLevel++;
+            //    production = +1;
+            //    playerWoodQuantity = -woodCost_1;
+            //    playerStoneQuantity = -stoneCost_1;
+            //    playerGoldQuantity = -goldCost_1;
+            //}
+            //if (currentLevel < upgradeLevel_2.UpgradeLevel && playerWoodQuantity >= woodCost_2 && playerStoneQuantity >= stoneCost_2 && playerGoldQuantity >= goldCost_2)
+            //{
+            //    currentLevel++;
+            //    production = +1;
+            //    playerWoodQuantity = -woodCost_2;
+            //    playerStoneQuantity = -stoneCost_2;
+            //    playerGoldQuantity = -goldCost_2;
+            //}
 
         }
         public void UpgradeQuarry()
@@ -344,94 +399,130 @@ namespace Clicker.Game
             var currentLevel = buildingQuarry.CurrentLevel;
             var production = buildingQuarry.Production;
 
-            var upgradeLevel_1 = buildingQuarry.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 1);
-            var wood_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-            var woodCost_1 = wood_1.Quantity;
-            var stone_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-            var stoneCost_1 = stone_1.Quantity;
-            var gold_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-            var goldCost_1 = gold_1.Quantity;
-
-            var upgradeLevel_2 = buildingQuarry.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 2);
-            var wood_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-            var woodCost_2 = wood_2.Quantity;
-            var stone_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-            var stoneCost_2 = stone_2.Quantity;
-            var gold_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-            var goldCost_2 = gold_2.Quantity;
-
-
-            var playerResourceWood = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-            var playerWoodQuantity = playerResourceWood.Quantity;
-            var playerResourceStone = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-            var playerStoneQuantity = playerResourceStone.Quantity;
-            var playerResourceGold = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-            var playerGoldQuantity = playerResourceGold.Quantity;
-
-            if (currentLevel < upgradeLevel_1.UpgradeLevel && playerWoodQuantity >= woodCost_1 && playerStoneQuantity >= stoneCost_1 && playerGoldQuantity >= goldCost_1)
+            var cost = buildingQuarry.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel > currentLevel);
+            if (cost.UpgradeCost.Any(upgradeCost => !CanAfford(upgradeCost.ResourceType, upgradeCost.Quantity)))
             {
-                currentLevel++;
-                production = +1;
-                playerWoodQuantity = -woodCost_1;
-                playerStoneQuantity = -stoneCost_1;
-                playerGoldQuantity = -goldCost_1;
+                //display message - sorry not enough resources
+
+                return;
             }
-            if (currentLevel < upgradeLevel_2.UpgradeLevel && playerWoodQuantity >= woodCost_2 && playerStoneQuantity >= stoneCost_2 && playerGoldQuantity >= goldCost_2)
+            else
             {
+                foreach (var upgradeCost in cost.UpgradeCost)
+                {
+                    var playerResource = GetResourceByType(upgradeCost.ResourceType);
+                    playerResource.Quantity -= upgradeCost.Quantity;
+                }
+                production++;
                 currentLevel++;
-                production = +1;
-                playerWoodQuantity = -woodCost_2;
-                playerStoneQuantity = -stoneCost_2;
-                playerGoldQuantity = -goldCost_2;
             }
+
+            //var upgradeLevel_1 = buildingQuarry.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 1);
+            //var wood_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+            //var woodCost_1 = wood_1.Quantity;
+            //var stone_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+            //var stoneCost_1 = stone_1.Quantity;
+            //var gold_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+            //var goldCost_1 = gold_1.Quantity;
+
+            //var upgradeLevel_2 = buildingQuarry.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 2);
+            //var wood_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+            //var woodCost_2 = wood_2.Quantity;
+            //var stone_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+            //var stoneCost_2 = stone_2.Quantity;
+            //var gold_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+            //var goldCost_2 = gold_2.Quantity;
+
+
+            //var playerResourceWood = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+            //var playerWoodQuantity = playerResourceWood.Quantity;
+            //var playerResourceStone = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+            //var playerStoneQuantity = playerResourceStone.Quantity;
+            //var playerResourceGold = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+            //var playerGoldQuantity = playerResourceGold.Quantity;
+
+            //if (currentLevel < upgradeLevel_1.UpgradeLevel && playerWoodQuantity >= woodCost_1 && playerStoneQuantity >= stoneCost_1 && playerGoldQuantity >= goldCost_1)
+            //{
+            //    currentLevel++;
+            //    production = +1;
+            //    playerWoodQuantity = -woodCost_1;
+            //    playerStoneQuantity = -stoneCost_1;
+            //    playerGoldQuantity = -goldCost_1;
+            //}
+            //if (currentLevel < upgradeLevel_2.UpgradeLevel && playerWoodQuantity >= woodCost_2 && playerStoneQuantity >= stoneCost_2 && playerGoldQuantity >= goldCost_2)
+            //{
+            //    currentLevel++;
+            //    production = +1;
+            //    playerWoodQuantity = -woodCost_2;
+            //    playerStoneQuantity = -stoneCost_2;
+            //    playerGoldQuantity = -goldCost_2;
+            //}
         }
         public void UpgradeGoldMine()
         {
             var building = buildings.FirstOrDefault(x => x is GoldMine);
-            var buildingGoldMine= building as GoldMine;
+            var buildingGoldMine = building as GoldMine;
             var currentLevel = buildingGoldMine.CurrentLevel;
             var production = buildingGoldMine.Production;
 
-            var upgradeLevel_1 = buildingGoldMine.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 1);
-            var wood_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-            var woodCost_1 = wood_1.Quantity;
-            var stone_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-            var stoneCost_1 = stone_1.Quantity;
-            var gold_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-            var goldCost_1 = gold_1.Quantity;
-
-            var upgradeLevel_2 = buildingGoldMine.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 2);
-            var wood_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-            var woodCost_2 = wood_2.Quantity;
-            var stone_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-            var stoneCost_2 = stone_2.Quantity;
-            var gold_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-            var goldCost_2 = gold_2.Quantity;
-
-
-            var playerResourceWood = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
-            var playerWoodQuantity = playerResourceWood.Quantity;
-            var playerResourceStone = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
-            var playerStoneQuantity = playerResourceStone.Quantity;
-            var playerResourceGold = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
-            var playerGoldQuantity = playerResourceGold.Quantity;
-
-            if (currentLevel < upgradeLevel_1.UpgradeLevel && playerWoodQuantity >= woodCost_1 && playerStoneQuantity >= stoneCost_1 && playerGoldQuantity >= goldCost_1)
+            var cost = buildingGoldMine.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel > currentLevel);
+            if (cost.UpgradeCost.Any(upgradeCost => !CanAfford(upgradeCost.ResourceType, upgradeCost.Quantity)))
             {
-                currentLevel++;
-                production = +1;
-                playerWoodQuantity = -woodCost_1;
-                playerStoneQuantity = -stoneCost_1;
-                playerGoldQuantity = -goldCost_1;
+                //display message - sorry not enough resources
+
+                return;
             }
-            if (currentLevel < upgradeLevel_2.UpgradeLevel && playerWoodQuantity >= woodCost_2 && playerStoneQuantity >= stoneCost_2 && playerGoldQuantity >= goldCost_2)
+            else
             {
+                foreach (var upgradeCost in cost.UpgradeCost)
+                {
+                    var playerResource = GetResourceByType(upgradeCost.ResourceType);
+                    playerResource.Quantity -= upgradeCost.Quantity;
+                }
+                production++;
                 currentLevel++;
-                production = +1;
-                playerWoodQuantity = -woodCost_2;
-                playerStoneQuantity = -stoneCost_2;
-                playerGoldQuantity = -goldCost_2;
             }
+
+            //var upgradeLevel_1 = buildingGoldMine.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 1);
+            //var wood_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+            //var woodCost_1 = wood_1.Quantity;
+            //var stone_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+            //var stoneCost_1 = stone_1.Quantity;
+            //var gold_1 = upgradeLevel_1.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+            //var goldCost_1 = gold_1.Quantity;
+
+            //var upgradeLevel_2 = buildingGoldMine.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel == 2);
+            //var wood_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+            //var woodCost_2 = wood_2.Quantity;
+            //var stone_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+            //var stoneCost_2 = stone_2.Quantity;
+            //var gold_2 = upgradeLevel_2.UpgradeCost.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+            //var goldCost_2 = gold_2.Quantity;
+
+
+            //var playerResourceWood = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Wood);
+            //var playerWoodQuantity = playerResourceWood.Quantity;
+            //var playerResourceStone = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Stone);
+            //var playerStoneQuantity = playerResourceStone.Quantity;
+            //var playerResourceGold = playerResources.FirstOrDefault(x => x.ResourceType == ResourceType.Gold);
+            //var playerGoldQuantity = playerResourceGold.Quantity;
+
+            //if (currentLevel < upgradeLevel_1.UpgradeLevel && playerWoodQuantity >= woodCost_1 && playerStoneQuantity >= stoneCost_1 && playerGoldQuantity >= goldCost_1)
+            //{
+            //    currentLevel++;
+            //    production = +1;
+            //    playerWoodQuantity = -woodCost_1;
+            //    playerStoneQuantity = -stoneCost_1;
+            //    playerGoldQuantity = -goldCost_1;
+            //}
+            //if (currentLevel < upgradeLevel_2.UpgradeLevel && playerWoodQuantity >= woodCost_2 && playerStoneQuantity >= stoneCost_2 && playerGoldQuantity >= goldCost_2)
+            //{
+            //    currentLevel++;
+            //    production = +1;
+            //    playerWoodQuantity = -woodCost_2;
+            //    playerStoneQuantity = -stoneCost_2;
+            //    playerGoldQuantity = -goldCost_2;
+            //}
         }
     }
 }

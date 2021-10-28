@@ -10,7 +10,7 @@ namespace Clicker.Game
     public class Worker
     {
         public enum Job { GoldMiner, Lumberjack, Quarryman }
-        public List<Resource> HireCost { get; set; }
+        public List<Resource> HireCosts { get; set; }
 
         private string name;
         public string Name { get; set; }
@@ -35,7 +35,7 @@ namespace Clicker.Game
         {
             Production = production;
             HiredWorkers = hiredWorkers;
-            HireCost = hireCost;
+            HireCosts = hireCost;
             JobType = jobType;
             Name = name;
         }

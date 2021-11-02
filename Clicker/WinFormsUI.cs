@@ -73,7 +73,8 @@ namespace Clicker
                 buildingButton.Text = building.Name;
                 buildingButton.AutoSize = true;
                 buildingButton.BackColor = Color.FromArgb(220, 112, 113);
-                buildingButton.Click += (s, e) => game.UpgradeBuilding(building);
+                buildingButton.Click += (s, e) => game.UpgradeBuilding(building); buildingButton.BackColor = Color.FromArgb(0, 200, 0);
+
 
             }
         }

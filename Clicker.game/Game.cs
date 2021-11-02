@@ -130,11 +130,31 @@ namespace Clicker.Game
 
         public void UpgradeBuilding(Building building)
         {
+
+            if (building is House)
+            {
+
+                UpgradeHouse();
+            }
+            else if (building is GoldMine)
+            {
+                UpgradeGoldMine();
+            }
+            else if (building is Lumber)
+            {
+                UpgradeLumber();
+            }
+            else if(building is Quarry)
+            {
+                UpgradeQuarry();
+            }
+
+
             //IS upgradable
             // if true,
 
 
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public List<Building> GetBuildings()
@@ -179,22 +199,7 @@ namespace Clicker.Game
             {
                 var worker = workers.FirstOrDefault(x => x.JobType == Worker.Job.Lumberjack);
                 var cost = worker.HireCosts;
-                if (cost.Any(upgradeCost => !CanAfford(upgradeCost.ResourceType, upgradeCost.Quantity)))
-                {
-                    //display message - sorry not enough resources
-
-                    return;
-                }
-                else
-                {
-                    foreach (var upgradeCost in cost)
-                    {
-                        var playerResource = GetResourceByType(upgradeCost.ResourceType);
-                        playerResource.Quantity -= upgradeCost.Quantity;
-                    }
-                    worker.Production++;
-                    worker.HiredWorkers++;
-                }
+                TryToHire(worker, cost);
             }
             else
             {
@@ -239,29 +244,32 @@ namespace Clicker.Game
             var populationCap = house.PopulationCap;
             return populationCap > currentPopulation;
         }
-        
+        public void TryToHire(Worker worker, List<Resource> cost)
+        {
+            if (cost.Any(upgradeCost => !CanAfford(upgradeCost.ResourceType, upgradeCost.Quantity)))
+            {
+                //display message - sorry not enough resources
+
+                return;
+            }
+            else
+            {
+                foreach (var upgradeCost in cost)
+                {
+                    var playerResource = GetResourceByType(upgradeCost.ResourceType);
+                    playerResource.Quantity -= upgradeCost.Quantity;
+                }
+                worker.Production++;
+                worker.HiredWorkers++;
+            }
+        }
         public void HireQuarryman()
         {
             if (!IsHouseFull())
             {
                 var worker = workers.FirstOrDefault(x => x.JobType == Worker.Job.Quarryman);
                 var cost = worker.HireCosts;
-                if (cost.Any(upgradeCost => !CanAfford(upgradeCost.ResourceType, upgradeCost.Quantity)))
-                {
-                    //display message - sorry not enough resources
-
-                    return;
-                }
-                else
-                {
-                    foreach (var upgradeCost in cost)
-                    {
-                        var playerResource = GetResourceByType(upgradeCost.ResourceType);
-                        playerResource.Quantity -= upgradeCost.Quantity;
-                    }
-                    worker.Production++; 
-                    worker.HiredWorkers++;
-                }
+                TryToHire(worker, cost);
             }
             else
             {
@@ -299,22 +307,7 @@ namespace Clicker.Game
             {
                 var worker = workers.FirstOrDefault(x => x.JobType == Worker.Job.GoldMiner);
                 var cost = worker.HireCosts;
-                if (cost.Any(upgradeCost => !CanAfford(upgradeCost.ResourceType, upgradeCost.Quantity)))
-                {
-                    //display message - sorry not enough resources
-
-                    return;
-                }
-                else
-                {
-                    foreach (var upgradeCost in cost)
-                    {
-                        var playerResource = GetResourceByType(upgradeCost.ResourceType);
-                        playerResource.Quantity -= upgradeCost.Quantity;
-                    }
-                    worker.Production++;
-                    worker.HiredWorkers++;
-                }
+                TryToHire(worker, cost);
             }
             else
             {

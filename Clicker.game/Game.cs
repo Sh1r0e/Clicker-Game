@@ -1,4 +1,4 @@
-﻿using Clicker.game;
+﻿using Clicker.Game;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -203,6 +203,7 @@ namespace Clicker.Game
             }
             else
             {
+                
                 //display message - You have to build more houses.
             }
             //var building = buildings.FirstOrDefault(x => x is House);
@@ -355,11 +356,11 @@ namespace Clicker.Game
             var populationCap = house.PopulationCap;
 
             var cost = house.UpgradesCosts.FirstOrDefault(x => x.UpgradeLevel > currentLevel);
+
             if (cost.UpgradeCost.Any(upgradeCost => !CanAfford(upgradeCost.ResourceType, upgradeCost.Quantity)))
             {
-                //display message - sorry not enough resources
-
-                return;
+                
+                throw new ExceptionResource("Not enough resources");
             }
             else
             {

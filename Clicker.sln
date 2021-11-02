@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clicker.WinForms", "Clicker
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clicker.WPF", "Clicker.WPF\Clicker.WPF.csproj", "{7305D045-20AD-42C6-97F9-78DF17C61DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clicker.game", "Clicker.game\Clicker.game.csproj", "{9A390C1B-2A9B-4C31-A92B-B1B69F2CBF76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clicker.Game", "Clicker.game\Clicker.Game.csproj", "{9A390C1B-2A9B-4C31-A92B-B1B69F2CBF76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

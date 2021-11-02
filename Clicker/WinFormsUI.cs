@@ -1,4 +1,5 @@
 ﻿using Clicker.Game;
+using Clicker.Game;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -73,9 +74,19 @@ namespace Clicker
                 buildingButton.Text = building.Name;
                 buildingButton.AutoSize = true;
                 buildingButton.BackColor = Color.FromArgb(220, 112, 113);
-                buildingButton.Click += (s, e) => game.UpgradeBuilding(building); buildingButton.BackColor = Color.FromArgb(0, 200, 0);
+                buildingButton.Click += (s, e) =>
+                {
+                    try
+                    {
+                        game.UpgradeBuilding(building);
+                        buildingButton.BackColor = Color.FromArgb(0, 200, 0);
 
-
+                    }
+                    catch(ExceptionResource)
+                    {
+                        
+                    }
+                };
             }
         }
 

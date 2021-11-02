@@ -1,4 +1,4 @@
-﻿using Clicker.game;
+﻿using Clicker.Game;
 using System;
 using System.Collections.Generic;
 using System.Linq;

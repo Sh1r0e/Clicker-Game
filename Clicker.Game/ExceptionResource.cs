@@ -8,6 +8,7 @@ namespace Clicker.Game
 {
     public class ExceptionResource : Exception
     {
+        //public ResourceType ResourceType { get; set; }
         public ExceptionResource()
         {
 

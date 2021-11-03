@@ -55,8 +55,22 @@ namespace Clicker
                 hirePanel.Controls.Add(workerButton);
                 workerButton.Dock = DockStyle.Top;
                 workerButton.Text = worker.Name;
+                workerButton.Height = 40;
                 workerButton.AutoSize = true;
                 workerButton.BackColor = Color.FromArgb(220, 112, 113);
+                workerButton.Click += (s, e) =>
+                {
+                    try
+                    {
+                        game.HireWorker(worker);
+                        workerButton.BackColor = Color.FromArgb(0, 200, 0);
+                    }
+                    catch (NotEnoughHousesException ex)
+                    {
+                        MessageBox.Show("Not enough houses");
+                    }
+
+                };
 
             }
         }
@@ -70,6 +84,7 @@ namespace Clicker
 
                 Button buildingButton = new Button();
                 buildPanel.Controls.Add(buildingButton);
+                buildingButton.Height = 40;
                 buildingButton.Dock = DockStyle.Top;
                 buildingButton.Text = building.Name;
                 buildingButton.AutoSize = true;
@@ -80,11 +95,11 @@ namespace Clicker
                     {
                         game.UpgradeBuilding(building);
                         buildingButton.BackColor = Color.FromArgb(0, 200, 0);
-
                     }
-                    catch(ExceptionResource)
+                    catch(ExceptionResource exception)
                     {
-                        
+                        MessageBox.Show("Not enough resources");
+                        // sEt Color etc
                     }
                 };
             }

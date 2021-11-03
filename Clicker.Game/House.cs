@@ -6,20 +6,9 @@ using System.Threading.Tasks;
 
 namespace Clicker.Game
 {
-    class House : Building
+    public class House : Building
     {
-        private int populationCap;
-        public int PopulationCap
-        {
-            get
-            {
-                return populationCap;
-            }
-            set
-            {
-                value = populationCap;
-            }
-        }
+        public int PopulationCap { get; set; }
 
         public House(string name, int currentLevel, int populationCap, List<BuildingUpgradesCost> upgradesCosts) : base(name, currentLevel, upgradesCosts)
         {

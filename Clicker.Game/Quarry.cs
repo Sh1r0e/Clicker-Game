@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Clicker.Game
 {
-    class Quarry : ProductionBuilding
+    public class Quarry : ProductionBuilding
     {
-       
-
         public Quarry(string name, int currentLevel, int production, ResourceType resourceType, List<BuildingUpgradesCost> upgradesCosts) : base(name, currentLevel, production, resourceType, upgradesCosts)
         {
             

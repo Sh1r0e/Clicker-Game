@@ -11,9 +11,7 @@ namespace Clicker.Game
 
     public class Resource
     {
-
         public ResourceType ResourceType { get; set; }
-
 
         public int Quantity { get; set; }
 
@@ -22,7 +20,5 @@ namespace Clicker.Game
             ResourceType = resourceType;
             Quantity = quantity;
         }
-
-        
     }
 }
